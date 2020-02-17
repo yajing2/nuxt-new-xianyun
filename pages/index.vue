@@ -1,12 +1,13 @@
 <template>
   <div>
     <div class="block">
-      <el-carousel height="700px" :interval="5000" arrow="always">
-        <el-carousel-item v-for="item in picList" :key="item.url">
-          <div
-            :style="{background: `url(${$axios.defaults.baseURL}${item.url}) no-repeat center`}"
-            class="carousel-box"
-          ></div>
+      <el-carousel height="700px"
+                   :interval="5000"
+                   arrow="always">
+        <el-carousel-item v-for="item in picList"
+                          :key="item.url">
+          <div :style="{background: `url(${$axios.defaults.baseURL}${item.url}) no-repeat center`}"
+               class="carousel-box"></div>
         </el-carousel-item>
       </el-carousel>
     </div>
@@ -15,21 +16,24 @@
     <div class="banner-content">
       <div class="search-bar">
         <!-- tab栏 -->
-        <el-row type="flex" class="search-tab">
-          <span
-            v-for="(item, index) in tabList"
-            :key="item.content"
-            @click="handleSwitch(index)"
-            :class="{active: index === currentIndex}"
-          >
+        <el-row type="flex"
+                class="search-tab">
+          <span v-for="(item, index) in tabList"
+                :key="item.content"
+                @click="handleSwitch(index)"
+                :class="{active: index === currentIndex}">
             <i>{{item.content}}</i>
           </span>
         </el-row>
-
+        <!-- 2020/02/17合并测试 -->
         <!-- 输入框 -->
-        <el-row type="flex" align="middle" class="search-input">
-          <input :placeholder="tabList[currentIndex].placeholder" @keydown.13="searchContent"/>
-          <i class="el-icon-search" @click="searchContent"></i>
+        <el-row type="flex"
+                align="middle"
+                class="search-input">
+          <input :placeholder="tabList[currentIndex].placeholder"
+                 @keydown.13="searchContent" />
+          <i class="el-icon-search"
+             @click="searchContent"></i>
         </el-row>
       </div>
     </div>
@@ -38,7 +42,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       currentIndex: 0,
       picList: [],
@@ -58,7 +62,7 @@ export default {
       ]
     }
   },
-  mounted() {
+  mounted () {
     this.$axios
       .get('/scenics/banners')
       .then(({ data }) => {
@@ -69,13 +73,13 @@ export default {
       })
   },
   methods: {
-    handleSwitch(index) {
+    handleSwitch (index) {
       if (index === 2) {
         this.$router.push('/air')
       }
       this.currentIndex = index
     },
-    searchContent() {
+    searchContent () {
       console.log('ok')
     }
   }
